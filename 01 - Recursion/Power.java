@@ -1,4 +1,3 @@
-
 class Power {
 
     // Optimized version of calculating power
