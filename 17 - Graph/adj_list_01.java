@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 @SuppressWarnings("unchecked")
-class Graph {
+class Graph2 {
 
     private final int V; // number of vertices
     private ArrayList<Integer>[] adj; // adjacency lists
 
-    public Graph(int V) {
+    public Graph2(int V) {
         this.V = V;
         adj = new ArrayList[V];
 
@@ -40,7 +40,7 @@ class adj_list_01 {
         int vertices = scn.nextInt();
         System.out.println("Enter the number of edges");
         int edges = scn.nextInt();
-        Graph g = new Graph(vertices);
+        Graph2 g = new Graph2(vertices);
 
         System.out.println("Enter the edges (node1, node2) : ");
         for (int i = 0; i < edges; i++) {
