@@ -2,6 +2,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 class Node {
 
@@ -130,6 +131,50 @@ class Node {
         }
     }
 
+    // Size of a binary tree
+
+    public int calculateSize(Node root) {
+
+        if (root == null) {
+            return 0;
+        }
+        return 1 + calculateSize(root.left) + calculateSize(root.right);
+
+    }
+
+    public int getMax(Node root) {
+        if (root == null) {
+            return Integer.MIN_VALUE;
+        }
+        return Math.max(root.val, Math.max(getMax(root.left), getMax(root.right)));
+
+    }
+
+    public void leftView(Node root) {
+        Deque<Node> dq = new ArrayDeque<Node>();
+
+        dq.add(root);
+
+        while (!dq.isEmpty()) {
+            int count = dq.size();
+            for (int i = 0; i < count; i++) {
+                Node curr = dq.poll();
+                if (i == 0) {
+                    System.out.print(curr.val + " ");
+                }
+                if (curr.left != null) {
+
+                    dq.add(curr.left);
+                }
+                if (curr.right != null) {
+
+                    dq.add(curr.right);
+                }
+            }
+
+        }
+    }
+
 }
 
 class Tree {
@@ -154,12 +199,16 @@ class Tree {
 
         root.level_order(root);
 
-        System.out.println(root.calculateHeight(root));
+        // System.out.println(root.calculateHeight(root));
 
         // root.printKthNode(root, 2);
 
         // root.printLevel(root);
-        root.printLevelLineByLine(root);
+        // root.printLevelLineByLine(root);
+
+        // System.out.println(root.calculateSize(root));
+        // System.out.println(root.getMax(root));
+        root.leftView(root);
 
     }
 }
