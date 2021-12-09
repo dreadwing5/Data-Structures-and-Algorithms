@@ -2,7 +2,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 class Node {
 
@@ -175,20 +174,63 @@ class Node {
         }
     }
 
+    public boolean isChildrenSum(Node root) {
+
+        if (root == null) {
+            return true;
+        }
+        if (root.left == null || root.right == null) {
+            return true;
+        }
+
+        int sum = 0;
+        if (root.left != null) {
+            sum += root.left.val;
+        }
+        if (root.right != null) {
+            sum += root.right.val;
+        }
+
+        return (sum == root.val && isChildrenSum(root.left) && isChildrenSum(root.right));
+
+    }
+
+    public int isBalancedSubTree(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int lheight = 1 + isBalancedSubTree(root.left);
+        int rheight = 1 + isBalancedSubTree(root.right);
+        int diff = Math.abs(lheight - rheight);
+        if (diff > 1 || lheight < 0 || rheight < 0) {
+            return -1;
+        }
+        return Math.max(lheight, rheight);
+
+    }
+
 }
 
 class Tree {
     public static void main(String[] args) {
 
-        Node root = new Node(4);
-        root.left = new Node(7);
-        root.right = new Node(2);
-        root.right.left = new Node(5);
-        root.right.right = new Node(1);
-        root.right.left.right = new Node(8);
-        root.left.right = new Node(9);
-        root.left.right.left = new Node(6);
-        root.left.right.right = new Node(3);
+        // Node root = new Node(4);
+        // root.left = new Node(7);
+        // root.right = new Node(2);
+        // root.right.left = new Node(5);
+        // root.right.right = new Node(1);
+        // root.right.left.right = new Node(8);
+        // root.left.right = new Node(9);
+        // root.left.right.left = new Node(6);
+        // root.left.right.right = new Node(3);
+
+        Node root = new Node(18);
+        root.left = new Node(4);
+        root.right = new Node(20);
+        root.right.left = new Node(13);
+        root.right.right = new Node(13);
+        root.right.right.right = new Node(13);
+        root.right.right.right.right = new Node(13);
 
         // System.out.println("Pre Order Traversal");
         // root.preorder_traversal(root);
@@ -208,7 +250,9 @@ class Tree {
 
         // System.out.println(root.calculateSize(root));
         // System.out.println(root.getMax(root));
-        root.leftView(root);
+        // root.leftView(root);
+        // System.out.println(root.isChildrenSum(root));
+        System.out.println(root.isBalancedSubTree(root));
 
     }
 }
